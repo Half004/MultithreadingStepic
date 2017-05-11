@@ -3,6 +3,7 @@
 #include <string>
 #include <regex>
 #include <cstdlib>
+#include <signal.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -89,6 +90,7 @@ void * slave_func(void *arg)
 int main(int argc, char **argv)
 {
     daemon(0, 0);
+    signal(SIGHUP, SIG_IGN);
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
