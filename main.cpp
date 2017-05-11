@@ -66,7 +66,8 @@ void * slave_func(void *arg)
 		for (int i = 0; i < 8152; ++i)
 			Buffer[i] = 0;
 		std::string name = http_parse(request);
-		std::string path = directory + "/" + name;
+		std::string path = directory;
+		path += "/" + name;
 		if (FILE *file = fopen(path.c_str(), "r"))
 		{
 			size_t n = fread(Buffer, 1, 8152, file);
