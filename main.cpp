@@ -80,6 +80,8 @@ void * slave_func(void *arg)
 			result = not_found;
 		}
 		send(fd, result.c_str(), result.length(), MSG_NOSIGNAL);
+		shutdown(fd, SHUT_RDWR);
+		close(fd);
 	}	
 	return 0;
 }
