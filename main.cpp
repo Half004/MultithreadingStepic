@@ -55,7 +55,7 @@ void * slave_func(void *arg)
 	char Buffer[8152];
 	int RecvResult = recv(fd, Buffer, 8152, MSG_NOSIGNAL);
 	Buffer[RecvResult] = '\0';
-	FILE *f = fopen("/home/vi/http.log", "a");
+	FILE *f = fopen("/home/box/http.log", "a");
 	fprintf(f, "%s\n", Buffer);
 	fclose(f);
 	//std::cout << "RecvResult = " << RecvResult << std::endl;
