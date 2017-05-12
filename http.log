@@ -1,0 +1,6 @@
+GET /index.html HTTP/1.0
+User-Agent: curl/7.35.0
+Host: 127.0.0.1:12345
+Accept: */*
+
+
