@@ -35,13 +35,14 @@ int set_nonblock(int fd)
 
 std::string http_parse(std::string& request)
 {
+	FILE *f = fopen("/home/box/regex.log", "a");
+	fprintf(f, "%s\n", request.c_str());
 	std::smatch m;
 	std::regex e("GET \/([\\w\.]*)([\?\\w\=\&]+|) HTTP\/[\\d\.]+");   // GET \/([\w\.]*)([\?\w=\&]+|) HTTP\/1\.0
 
 	std::regex_search(request, m, e);
 	auto i = m.begin() + 1;
 	std::string res = *i;
-	FILE *f = fopen("/home/box/regex.log", "a");
 	fprintf(f, "%s\n", res.c_str());
 	fclose(f);
 	return res;
@@ -95,7 +96,7 @@ void * slave_func(void *arg)
 
 int main(int argc, char **argv)
 {
-	signal(SIGHUP, SIG_IGN);
+    signal(SIGHUP, SIG_IGN);
     daemon(0, 0);
     pthread_attr_t attr;
     pthread_attr_init(&attr);
