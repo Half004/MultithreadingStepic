@@ -53,7 +53,10 @@ void * slave_func(void *arg)
 	//std::cout << "Events = " << Events[i].events << std::endl;
 	char Buffer[8152];
 	int RecvResult = recv(fd, Buffer, 8152, MSG_NOSIGNAL);
-    Buffer[RecvResult] = '\0';
+	Buffer[RecvResult] = '\0';
+	FILE *f = fopen("/home/vi/http.log", "a");
+	fprintf(f, "%s\n", Buffer);
+	fclose(f);
 	//std::cout << "RecvResult = " << RecvResult << std::endl;
 	if ((RecvResult == 0) && (errno != EAGAIN))
 	{
