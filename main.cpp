@@ -17,7 +17,7 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 
-#define MAX_EVENTS 32
+#define MAX_EVENTS 128
 struct epoll_event Events[MAX_EVENTS];
 char *directory;
 
@@ -193,8 +193,11 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				pthread_t thread;
-				pthread_create(&thread, &attr, slave_func, &Events[i].data.fd);
+				//pthread_t thread;
+				//pthread_create(&thread, &attr, slave_func, &Events[i].data.fd);
+				slave_func(&Events[i].data.fd);
+				//shutdown(fd, SHUT_RDWR);
+				//close(Events[i].data.fd);
 			}
 		}
 	//	std::cout << "While cycle" << std::endl;
