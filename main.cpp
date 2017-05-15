@@ -95,7 +95,7 @@ void * slave_func(void *arg)
 			size_t n = fread(Buffer, 1, 8152, file);
 			Buffer[n] = '\0';
 			result += Buffer;
-			
+			fclose(file);			
 		}
 		else
 		{
