@@ -33,7 +33,7 @@ int set_nonblock(int fd)
 #endif
 }
 
-std::string http_parse(std::string& request)
+/*std::string http_parse(std::string& request)
 {
 	FILE *f = fopen("/home/box/regex.log", "a");
 	fprintf(f, "%s\n", request.c_str());
@@ -46,6 +46,15 @@ std::string http_parse(std::string& request)
 	fprintf(f, "%s\n", res.c_str());
 	fclose(f);
 	return res;
+}*/
+
+std::string http_parse(std::string& request)
+{
+	char *str = new char[request.length() + 1];
+	strcpy(str, request.c_str());
+	char *name = strtok(str + 4, "/? ");
+	std::string res = name;
+	return res;	
 }
 
 void * slave_func(void *arg)
@@ -97,7 +106,7 @@ void * slave_func(void *arg)
 int main(int argc, char **argv)
 {
     signal(SIGHUP, SIG_IGN);
-    daemon(0, 0);
+    //daemon(0, 0);
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
