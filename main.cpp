@@ -51,10 +51,14 @@ int set_nonblock(int fd)
 
 std::string http_parse(std::string& request)
 {
+	FILE *f = fopen("/home/box/regex.log", "a");
+	fprintf(f, "request:\n%s\n", request.c_str());
 	char *str = new char[request.length() + 1];
 	strcpy(str, request.c_str());
 	char *name = strtok(str + 4, "/? ");
 	std::string res = name;
+	fprintf(f, "answer:\n%s\n", res.c_str());
+	fclose(f);
 	return res;	
 }
 
