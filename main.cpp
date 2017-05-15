@@ -107,7 +107,7 @@ void * slave_func(void *arg)
 int main(int argc, char **argv)
 {
     signal(SIGHUP, SIG_IGN);
-    //daemon(0, 0);
+    daemon(0, 0);
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
